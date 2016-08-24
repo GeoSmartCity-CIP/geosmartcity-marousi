@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Geosmartcity Client for Marousi</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="node_modules/openlayers/dist/ol.css" rel="stylesheet">
+    <link href="node_modules/gsc/dist/gsc.css" rel="stylesheet">
+    <script src="node_modules/openlayers/dist/ol.js"></script>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+      <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="node_modules/gsc/dist/gsc.js""></script>
+
+
+    <link href="../../dist/mrc.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="page-header">
+    <div class="container">
+        <h2>GeoSmartCity Client for Marousi</h2>
+    </div>
+</div>
+
+
+<div class="container">
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Sign In/ Register</button>
+
+ 
+  
+</div>
+
+
+<div class="container">
+    
+
+      <div id="toolbar">
+        <ul>
+            <li>
+                <a>Filter:</a>
+                <select id="filterType" onchange="setInfo();">
+                    <option value="cql">CQL</option>
+                    <option value="ogc">OGC</option>
+                    <option value="fid">FeatureID</option>
+                </select>
+                <input type="text" size="80" id="filter" placeholder="For example: ID=4 00" onfocus="this.placeholder=''" onblur="setInfo();"/>
+                <a id="updateFilterButton" href="#"  title="Apply filter">Apply</a>
+                <a id="resetFilterButton" href="#"  title="Reset filter">Reset</a>
+            </li>
+        </ul>
+    </div>
+        <div id="nodelist">
+        <em>Click on the map to get feature info</em>
+    </div>
+    
+
+    <div id='map'></div>
+    <div id="controls">
+        <span id="coordinate"></span>
+        <span id="scalebar"></span>
+    </div>
+
+
+     <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>          
+        </div>
+        <div class="modal-body">
+          <div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+								<a href="#" class="active" id="login-form-link">Login</a>
+							</div>
+							<div class="col-xs-6">
+								<a href="#" id="register-form-link">Register</a>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<form id="login-form"  method="post" role="form" style="display: block;">
+									<div class="form-group">
+										<input type="text" name="username" id="login-username" tabindex="1" class="form-control" placeholder="Username" value="">
+									</div>
+									<div class="form-group">
+										<input type="password" name="password" id="login-password" tabindex="2" class="form-control" placeholder="Password">
+									</div>
+									<div class="form-group text-center">
+										<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+										<label for="remember"> Remember Me</label>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="text-center">
+													<a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+								<form id="register-form"  role="form" style="display: none;">
+									<div class="form-group">
+										<input type="text" name="register-username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+									</div>
+									<div class="form-group">
+										<input type="email" name="register-email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+									</div>
+									<div class="form-group">
+										<input type="password" name="register-password" id="password" tabindex="2" class="form-control" placeholder="Password">
+									</div>
+									<div class="form-group">
+										<input type="password" name="register-confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+									</div>
+                                    <div class="form-group">
+										 <label for="organization">Organization list:</label>
+                                              <select class="form-control" id="organization">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                              </select>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+        </div>       
+      </div>
+      
+    </div>
+  </div>	
+
+    <script src="dist/mrc.js"></script>
+
+</div>
+</body>
+</html>
