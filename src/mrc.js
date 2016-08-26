@@ -23,6 +23,13 @@ var marousi = new ol.layer.Image({
     })
 });
 
+var osm =  new ol.layer.Tile({
+            source: new ol.source.OSM()
+          });
+
+gsc.map.addLayer(osm);
+
+
 
 function setInfo() {
     var filterType = document.getElementById('filterType').value;
