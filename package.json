@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "express": "~4.5.1",
-    "gsc": "^0.1.7",
+    "gsc": "0.1.9",
     "bootstrap": "^3.3.6",
     "jquery.1": "^1.0.0",
     "openlayers": "^3.13.0"

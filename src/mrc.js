@@ -10,6 +10,39 @@ var options = {
 gsc.map.create('map', options);
 
 
+
+// Selectors for editing popup overlay
+var container = $('#popup');
+var content = $('#popup-content');
+var closer = $('#popup-closer');
+
+
+var url = 'http://hub.geosmartcity.eu/geoserver/gsc/ows';
+
+var sourceWFS = new ol.source.Vector({
+        format: new ol.format.GeoJSON({
+			defaultDataProjection: ol.proj.get('EPSG:4326')
+		}),
+        url: function(extent) {
+          return 'http://hub.geosmartcity.eu/geoserver/gsc/ows?service=WFS&' +
+              'version=1.1.0&request=GetFeature&typename=marousi&' +
+              'outputFormat=application/json&srsname=EPSG:4326&' +
+              'bbox=' + extent.join(',') + ',EPSG:4326';
+        },
+        strategy: ol.loadingstrategy.bbox,
+		projection: 'EPSG:4326'
+      });
+
+
+var layerWFS = new ol.layer.Vector({
+    source: sourceWFS
+});
+
+
+
+
+
+
 var marousi = new ol.layer.Image({
     source: new ol.source.ImageWMS({
         ratio: 1,
@@ -28,6 +61,13 @@ var osm =  new ol.layer.Tile({
           });
 
 gsc.map.addLayer(osm);
+
+
+gsc.map.addLayer(layerWFS);
+
+
+gsc.editFeatures.create(container, content, closer, '#mdl-button', gsc.map, url);
+gsc.editFeatures.addLayer(layerWFS);
 
 
 
@@ -53,17 +93,13 @@ gsc.map.addScaleBarControl('scalebar');
 
 
 $('#updateFilterButton').on('click', function () {
-
     gsc.map.filterOnAttributes($('#filterType').val(), $('#filter').val())
-
 });
 
 
 
 $('#resetFilterButton').on('click', function () {
-
     gsc.map.resetFilter('cql', '')
-
 });
 
 gsc.map.addInfoOnFeatureEvent('nodelist', 50, marousi);
@@ -112,3 +148,15 @@ $(function () {
             })
     });
 });
+
+
+// add info on feature functionality
+//gsc.map.addInfoOnFeatureEvent('nodelist', 50, navarre_cadaster);
+var comment=gsc.GeoComment({
+	map:gsc.map,
+	container:".botonera",
+	layer:marousi,
+	url:"service/"});
+/*gsc.map.addInfoOnFeatureEvent('nodelist', 50, navarre_cadaster,function(capas){
+	comment.show();
+});*/

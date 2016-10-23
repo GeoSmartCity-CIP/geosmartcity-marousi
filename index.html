@@ -7,7 +7,7 @@
 	<link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 	<link href="node_modules/openlayers/dist/ol.css" rel="stylesheet">
 	<link href="node_modules/gsc/dist/gsc.css" rel="stylesheet">
-	<script src="node_modules/openlayers/dist/ol.js"></script>
+	<script src="node_modules/openlayers/dist/ol-debug.js"></script>
 
 	<script src="node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
@@ -17,7 +17,7 @@
     <link href="../../dist/mrc.css" rel="stylesheet">
 </head>
 <body>
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="page-header">
     <div class="container">
@@ -41,7 +41,7 @@
                     <option value="ogc">OGC</option>
                     <option value="fid">FeatureID</option>
                 </select>
-                <input type="text" size="80" id="filter" placeholder="For example: ID=4 00" onfocus="this.placeholder=''" onblur="setInfo();"/>
+                <input type="text" size="80" id="filter" value="floors=4" onfocus="this.placeholder=''" onblur="setInfo();"/>
                 <a id="updateFilterButton" href="#"  title="Apply filter">Apply</a>
                 <a id="resetFilterButton" href="#"  title="Reset filter">Reset</a>
             </li>
@@ -53,10 +53,22 @@
     
 
     <div id='map'></div>
+	<button id="btnEditAttributes" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+	  <i class="material-icons">description</i>
+	</button>
+
+<a href="#" id="1" class="edit" data-type="text"></a>
+	<script>$('.edit').editable({
+    type: 'text',
+    title: 'Enter username'
+});</script>
+
     <div id="controls">
         <span id="coordinate"></span>
         <span id="scalebar"></span>
     </div>
+
+	<div class="botonera"></div>
 
 
      <!-- Modal -->
