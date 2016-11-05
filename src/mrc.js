@@ -112,9 +112,25 @@ var overlaygroupLayers = new ol.layer.Group({
 gsc.map.addLayer(overlaygroupLayers);
 
 
+//Edit WFS attributes
+gsc.editFeatures.create(container, content, closer, '#mdl-button', gsc.map.olMap, url);
+gsc.editFeatures.addLayer(layerWFS);
+
+
+//added MousePosition control
+gsc.map.addMousePositionControl('coordinate');
+//added ScaleBar control
+gsc.map.addScaleBarControl('scalebar');
+
+//Layer Switcher
+var layerSwitcher = new ol.control.LayerSwitcher({
+    tipLabel: 'Layer Switcher' // Optional label for button
+});
+gsc.map.olMap.addControl(layerSwitcher);
 
 
 
+// WMS filter
 function setInfo() {
     var filterType = document.getElementById('filterType').value;
     if (filterType == "cql") {
@@ -127,87 +143,16 @@ function setInfo() {
         document.getElementById('filter').placeholder = "For example: marousi.Maroussi_4081";
     }
 }
-
-
-gsc.editFeatures.create(container, content, closer, '#mdl-button', gsc.map.olMap, url);
-gsc.editFeatures.addLayer(layerWFS);
-
-gsc.map.addMousePositionControl('coordinate');
-
-gsc.map.addScaleBarControl('scalebar');
-
-//Layer Switcher
-var layerSwitcher = new ol.control.LayerSwitcher({
-    tipLabel: 'Layer Switcher' // Optional label for button
-});
-gsc.map.olMap.addControl(layerSwitcher);
-
-
-
-
-
 $('#updateFilterButton').on('click', function () {
     gsc.map.filterOnAttributes($('#filterType').val(), $('#filter').val())
 });
-
-
-
 $('#resetFilterButton').on('click', function () {
     gsc.map.resetFilter('cql', '')
 });
-
 gsc.map.addInfoOnFeatureEvent('nodelist', 50, marousi);
 
 
-
-$(function () {
-    $('#login-form-link').click(function (e) {
-        $("#login-form").delay(100).fadeIn(100);
-        $("#register-form").fadeOut(100);
-        $('#register-form-link').removeClass('active');
-        $(this).addClass('active');
-        e.preventDefault();
-    });
-    $('#register-form-link').click(function (e) {
-        $("#register-form").delay(100).fadeIn(100);
-        $("#login-form").fadeOut(100);
-        $('#login-form-link').removeClass('active');
-        $(this).addClass('active');
-        e.preventDefault();
-    });
-
-
-    $('#login-submit').click(function (e) {
-        e.preventDefault();
-        var username = $('#login-username').value;
-        var password = $('#login-password').value;
-        gsc.user.login(username, password).then(function (res) {
-            console.log(res.description);
-        })
-    });
-
-
-    $('#register-form').click(function (e) {
-        e.preventDefault();
-        var email = $('#register-email').value;
-        var username = $('#register-username').value;
-        var password = $('#register-password').value;
-        var confirmpassword = $('#register-confirm-password').value;
-        var organization = $('#organization').value;
-        gsc.user.register(email, username, password, confirmpassword, [{
-                'organization': organization
-            }])
-            .then(function (res) {
-                var userId = res.id;
-                console.log(res.description);
-                console.log(userId);
-            })
-    });
-});
-
-
-
-
+//Get Address module
 $(function () {
     var val = "";
     $("#submit").click(function (event) {
@@ -293,5 +238,51 @@ $(function () {
                 alert(' Error in processing! ' + textStatus);
             }
         });
+    });
+});
+
+//registrtion Area
+$(function () {
+    $('#login-form-link').click(function (e) {
+        $("#login-form").delay(100).fadeIn(100);
+        $("#register-form").fadeOut(100);
+        $('#register-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+    $('#register-form-link').click(function (e) {
+        $("#register-form").delay(100).fadeIn(100);
+        $("#login-form").fadeOut(100);
+        $('#login-form-link').removeClass('active');
+        $(this).addClass('active');
+        e.preventDefault();
+    });
+
+
+    $('#login-submit').click(function (e) {
+        e.preventDefault();
+        var username = $('#login-username').value;
+        var password = $('#login-password').value;
+        gsc.user.login(username, password).then(function (res) {
+            console.log(res.description);
+        })
+    });
+
+
+    $('#register-form').click(function (e) {
+        e.preventDefault();
+        var email = $('#register-email').value;
+        var username = $('#register-username').value;
+        var password = $('#register-password').value;
+        var confirmpassword = $('#register-confirm-password').value;
+        var organization = $('#organization').value;
+        gsc.user.register(email, username, password, confirmpassword, [{
+                'organization': organization
+            }])
+            .then(function (res) {
+                var userId = res.id;
+                console.log(res.description);
+                console.log(userId);
+            })
     });
 });
