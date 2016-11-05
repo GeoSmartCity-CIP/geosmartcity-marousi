@@ -10,6 +10,13 @@ var options = {
 // map initializing
 gsc.map.create('map', options);
 
+var interactions =  [
+        new ol.interaction.MouseWheelZoom(),
+        new ol.interaction.DragPan()
+    ];
+
+gsc.map.interactions =   interactions;  
+
 
 
 // Selectors for editing popup overlay
@@ -113,8 +120,13 @@ gsc.map.addLayer(overlaygroupLayers);
 
 
 //Edit WFS attributes
+var formatGML = new ol.format.GML({
+    featureNS: 'featureNS',
+    featureType: 'featureType',
+    srsName: 'EPSG:4326'
+});
 gsc.editFeatures.create(container, content, closer, '#mdl-button', gsc.map.olMap, url);
-gsc.editFeatures.addLayer(layerWFS);
+gsc.editFeatures.addLayer(layerWFS, formatGML);
 
 
 //added MousePosition control
@@ -149,7 +161,7 @@ $('#updateFilterButton').on('click', function () {
 $('#resetFilterButton').on('click', function () {
     gsc.map.resetFilter('cql', '')
 });
-gsc.map.addInfoOnFeatureEvent('nodelist', 50, marousi);
+//gsc.map.addInfoOnFeatureEvent('nodelist', 50, marousi);
 
 
 //Get Address module

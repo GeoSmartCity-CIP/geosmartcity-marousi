@@ -47,8 +47,7 @@
     "express": "~4.5.1",
     "gsc": "0.1.9",
     "bootstrap": "^3.3.6",
-    "x-editable": "^1.5.1",
-    "jquery.1": "^1.0.0",
+    "jquery": "3.1.1",
     "openlayers": "^3.13.0",
     "ol3-layerswitcher": "^1.1.2"
   },
