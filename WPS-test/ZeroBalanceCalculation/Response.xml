@@ -1,0 +1,18 @@
+<ExecuteResponse xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:xml="http://www.w3.org/XML/1998/namespace" xml:lang="en" statusLocation="http://hub.geosmartcity.eu/geoserver/ows?service=WPS&amp;version=1.0.0&amp;request=GetExecutionStatus&amp;executionId=35d18048-4105-4ca2-8b9b-05e128558902" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0.0" serviceInstance="http://hub.geosmartcity.eu/geoserver/ows?" service="WPS" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ows="http://www.opengis.net/ows/1.1">
+	<Process wps:processVersion="1.0.0">
+		<Identifier>
+			gsc:SolarPotentialCalculation
+		</Identifier>
+		<Title>
+			solarPotentialCalculation
+		</Title>
+		<Abstract>
+			Service that compute solar potential
+		</Abstract>
+	</Process>
+	<Status creationTime="2016-11-06T10:21:32.440Z">
+		<ProcessAccepted>
+			Process accepted.
+		</ProcessAccepted>
+	</Status>
+</ExecuteResponse>
