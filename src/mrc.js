@@ -7,15 +7,20 @@ var options = {
     zoom: 10
 };
 
+var map;
+
 // map initializing
 gsc.map.create('map', options);
 
-var interactions =  [
-        new ol.interaction.MouseWheelZoom(),
-        new ol.interaction.DragPan()
-    ];
+var interactions = [
+    new ol.interaction.MouseWheelZoom(),
+    new ol.interaction.DragPan()
+];
 
-gsc.map.interactions =   interactions;  
+gsc.map.interactions = interactions;
+
+
+map = gsc.map.olMap;
 
 
 
@@ -50,21 +55,21 @@ var layerWFS = new ol.layer.Vector({
 
 //WMS marousi
 var marousi = new ol.layer.Image({
-            title: 'Buildings',
-            type: 'overlay',
-            combine: true,
-            visible: true,
-            source: new ol.source.ImageWMS({
-                ratio: 1,
-                url: 'http://hub.geosmartcity.eu/geoserver/gsc/wms',
-                params: {
-                    'FORMAT': 'image/png',
-                    'VERSION': '1.1.1',
-                    LAYERS: 'gsc:marousi',
-                    STYLES: ''
-                }
-            })
-        });
+    title: 'Buildings',
+    type: 'overlay',
+    combine: true,
+    visible: true,
+    source: new ol.source.ImageWMS({
+        ratio: 1,
+        url: 'http://hub.geosmartcity.eu/geoserver/gsc/wms',
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            LAYERS: 'gsc:marousi',
+            STYLES: ''
+        }
+    })
+});
 
 
 var basemapLayers = new ol.layer.Group({
@@ -111,12 +116,13 @@ gsc.map.addLayer(basemapLayers);
 var overlaygroupLayers = new ol.layer.Group({
     title: 'Overlays',
     layers: [
-       marousi,
+        marousi,
         layerWFS
     ]
 });
 
 gsc.map.addLayer(overlaygroupLayers);
+
 
 
 //Edit WFS attributes
@@ -125,7 +131,7 @@ var formatGML = new ol.format.GML({
     featureType: 'featureType',
     srsName: 'EPSG:4326'
 });
-gsc.editFeatures.create(container, content, closer, '#mdl-button', gsc.map.olMap, url);
+gsc.editFeatures.create(container, content, closer, '#mdl-button', map, url);
 gsc.editFeatures.addLayer(layerWFS, formatGML);
 
 
@@ -177,7 +183,7 @@ $(function () {
             data: {
                 address: address
             },
-           
+
             crossDomain: "true",
             url: "http://hub.geosmartcity.eu/MarousiGeocoderServer/geo/RestService/getaddress",
             //url: "http://localhost:8080/MarousiGeocoderServer/geo/RestService/getaddress",
@@ -298,3 +304,49 @@ $(function () {
             })
     });
 });
+
+
+
+
+//Download WFS layer module
+gsc.download.create(map, layerWFS);
+$(function () {
+    $('#btnDownload').click(function () {
+        var format = document.getElementById('slcformat').value;
+         var result, contentType;
+        if (format == "kml") {
+           result =  gsc.download.kml();
+           contentType= 'application/vnd.google-earth.kml+xml';
+           console.log(result);
+        }
+        if (format == "wkt") {
+           result =  gsc.download.wkt();
+           contentType= 'text/plain';
+        }
+        if (format == "gpx") {
+           result =  gsc.download.gpx();
+           contentType= 'text/plain';
+        }
+        if (format == "json") {
+           result =  gsc.download.json();
+           contentType= 'text/plain';
+        }
+        if (format == "gml") {
+           result =  gsc.download.gml(ol.format.GML);
+          contentType= "application/gml+xml";
+        }
+        download(result, 'result.' + format, contentType);
+    });
+})
+
+
+function download(content, filename, contentType)
+{
+    if(!contentType) contentType = 'application/octet-stream';
+        var a = document.createElement('a');
+        var blob = new Blob([content], {'type':contentType});
+        a.href = window.URL.createObjectURL(blob);
+        a.download = filename;
+        a.click();
+}
+
