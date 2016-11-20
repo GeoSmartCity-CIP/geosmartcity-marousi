@@ -14,8 +14,36 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
-# Distribution
-dist
+
+#WPS-test
+WPS-test
+
+# src
+src
+
+#jshintrc
+.jshintrc
+
+#Grunt
+Gruntfile.js 
+
+#License
+LICENSE 
+
+#package
+package.json 
+
+#README
+README.md 
+
+#server
+server.js
+
+#ignore
+.gitignore
+.gitattributes
+
+
 
 # nyc test coverage
 .nyc_output
