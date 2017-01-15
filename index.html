@@ -2,117 +2,191 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8"> 
+	<meta charset="UTF-8">
 	<title>Geosmartcity Client for Marousi</title>
 	<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css" />
 	<link href="node_modules/openlayers/dist/ol.css" rel="stylesheet">
 	<link href="node_modules/ol3-layerswitcher/src/ol3-layerswitcher.css" rel="stylesheet" />
 	<link href="node_modules/gsc/dist/gsc.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-					crossorigin="anonymous" />
+			crossorigin="anonymous" />
 	<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"
 	/>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
 	<script type="text/javascript" type="text/javascript" src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 	<script type="text/javascript" src="node_modules/openlayers/dist/ol-debug.js"></script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-					crossorigin="anonymous"></script>
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.14/proj4.js"></script>
-	<script type="text/javascript" src="node_modules/ol3-layerswitcher/src/ol3-layerswitcher.js"></script>
-	<script type="test/javascript" src="https://raw.githubusercontent.com/boundlessgeo/wps-gui/master/src/wpsclient.js"></script>
-	<!--Den douleuei i metafrasi!!!!
+			crossorigin="anonymous"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.14/proj4.js"></script>
+		<script type="text/javascript" src="node_modules/ol3-layerswitcher/src/ol3-layerswitcher.js"></script>
+		<script type="test/javascript" src="https://raw.githubusercontent.com/boundlessgeo/wps-gui/master/src/wpsclient.js"></script>
+		<!--Den douleuei i metafrasi!!!!
 		<script src=https://github.com/i18next/i18next/blob/master/i18next.min.js/>-->
-	<link href="../../dist/mrc.css" rel="stylesheet">
+		<link href="../../dist/mrc.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<!-- Main jumbotron for a primary marketing message or call to action -->
-	<div class="page-header">
-		<div class="container">
-			<h2>GeoSmartCity Client for Marousi</h2>
-		</div>
-	</div>
-	<!--Register Sector -->
 	<div class="container">
-		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
-		Sign In/ Register
-		</button>
-	</div>
-	<!-- Get Adress sector-->
-	<div>
-		<form class="form-horizontal" role="form">
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="address">address:</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="address" placeholder="Κηφισίας">
+		<nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+					<a class="navbar-brand" href="#">Geosmartcity Marousi client</a>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default" id="submit">Submit</button>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+				Sign In/ Register
+				</button>
+						</li>
+					</ul>
 				</div>
+				<!-- /.navbar-collapse -->
 			</div>
-		</form>
+			<!-- /.container-fluid -->
+		</nav>
 	</div>
-	<!-- WMS filter sector -->
-	<div id="toolbar">
-		<ul>
-			<li>
-				<a>Filter:</a>
-				<select id="filterType" onchange="setInfo();">
-                    <option value="cql">CQL</option>
-                    <option value="ogc">OGC</option>
-                    <option value="fid">FeatureID</option>
-                </select>
-				<input type="text" size="80" id="filter" value="floors=4" onfocus="this.placeholder=''" onblur="setInfo();" />
-				<a id="updateFilterButton" href="#" title="Apply filter">Apply</a>
-				<a id="resetFilterButton" href="#" title="Reset filter">Reset</a>
-			</li>
-		</ul>
-	</div>
-	<!-- WMS get feature request sector -->
-	<div id="nodelist">
-		<em>Click on the map to get feature info</em>
-	</div>
-	<!-- map -->
-	<div id='map'></div>
+	</nav>
+	<div class="navbar-offset"></div>
+	<div id="map"> </div>
 	<!-- Edit pop up sector-->
 	<div id="popup" class="ol-popup">
 		<a href="#" id="popup-closer" class="ol-popup-closer"></a>
 		<div id="popup-content"></div>
 	</div>
-	<!-- Edit attribute sector -->
-	<button id="btnEditAttributes" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-	  		<i class="material-icons">description</i>
-		</button>
-	<button id="btnDelete" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-		<i class="material-icons">delete</i>
-		</button>
-	<a href="#" id="1" class="edit" data-type="text"></a>
+	<div class="row main-row">
+		<div class="col-sm-4 col-md-3 sidebar sidebar-left pull-left">
+			<div class="panel-group sidebar-body" id="accordion-left">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" href="#addressdiv">
+								<i class="fa fa-list-alt"></i> Address
+							</a>
+							<span class="pull-right slide-submenu">
+                    <i class="fa fa-chevron-left"></i>
+                  </span>
+						</h4>
+					</div>
+					<div id="addressdiv" class="panel-collapse collapse in">
+						<div class="panel-body list-group">
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<label class="control-label col-sm-2" for="address">address:</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="address" placeholder="Κηφισίας">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<button type="submit" class="btn btn-default" id="submit">Submit</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" href="#wms">
+								<i class="fa fa-list-alt"></i> WMS filter
+							</a>
+						</h4>
+					</div>
+					<div id="wms" class="panel-collapse collapse in">
+						<div class="panel-body">
+							<div id="toolbar">
+								<ul>
+									<li>
+										<a>Filter:</a>
+										<select id="filterType" onchange="setInfo();">
+									<option value="cql">CQL</option>
+									<option value="ogc">OGC</option>
+									<option value="fid">FeatureID</option>
+								</select>
+										<input type="text" size="20" id="filter" value="floors=4" onfocus="this.placeholder=''" onblur="setInfo();" />
+										<a id="updateFilterButton" href="#" title="Apply filter">Apply</a>
+										<a id="resetFilterButton" href="#" title="Reset filter">Reset</a>
+									</li>
+								</ul>
+							</div>
+							<!-- WMS get feature request sector -->
+							<div id="nodelist">
+								<em>Click on the map to get feature info</em>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" href="#edit">
+								<i class="fa fa-list-alt"></i> Edit attribute
+							</a>
+						</h4>
+					</div>
+					<div id="edit" class="panel-collapse collapse in">
+						<div class="panel-body">
+							<button id="btnEditAttributes" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+								<i class="material-icons">description</i>
+						</button>
+							<button id="btnDelete" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
+						<i class="material-icons">delete</i>
+						</button>
+							<a href="#" id="1" class="edit" data-type="text"></a>
+						</div>
+					</div>
+				</div>
+
+
+
+
+				<div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" href="#download ">
+                    <i class="fa fa-list-alt"></i>
+                    Download 
+                  </a>
+                </h4>
+              </div>
+              <div id="download " class="panel-collapse collapse in">
+                <div class="panel-body">                 
+													Select a feature to download
+													</p>
+													Then select the format: 
+													</p>
+												<select id="slcformat" >
+																					<option value="gml">GML</option>
+																					<option value="kml">KML</option>
+																					<option value="wkt">WKT</option>
+																<option value="gpx">GPX</option>
+																					<option value="json">JSON</option>
+																			</select>
+												<button id="btnDownload" class="glyphicon glyphicon-download-alt"></button>
+												</div>
+                </div>
+              </div>
 
 
 
 
 
-	<!-- Download module -->
-	<div class="container">
-		Select a feature to download
-		</p>
-		Then select the format: 
-		</p>
-	<select id="slcformat" >
-                    <option value="gml">GML</option>
-                    <option value="kml">KML</option>
-                    <option value="wkt">WKT</option>
-					 <option value="gpx">GPX</option>
-                    <option value="json">JSON</option>
-                </select>
-	<button id="btnDownload" class="glyphicon glyphicon-download-alt"></button>
+
+			</div>
+		</div>
 	</div>
-
-
 	<!-- map cotrols sector -->
 	<div id="controls">
 		<span id="coordinate"></span>
@@ -211,11 +285,15 @@
 			</div>
 		</div>
 	</div>
-	<script>$('.edit').editable({
-    type: 'text',
-    title: 'Enter username'
-});</script>
+
+	</div>
 </body>
+<script>
+	$('.edit').editable({
+		type: 'text',
+		title: 'Enter username'
+	});
+</script>
 <script type="text/javascript" src="node_modules/gsc/dist/gsc.js"></script>
 <script type="text/javascript" src="dist/mrc.js"></script>
 
