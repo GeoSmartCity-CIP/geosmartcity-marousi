@@ -20,6 +20,9 @@ grunt
 
 Navigate to [http://localhost:3000](http://localhost:3000)
 
+## Web Site
+The web application can be found in [http://hub.geosmartcity.eu/geosmartcity-marousi/](http://hub.geosmartcity.eu/geosmartcity-marousi/)
+
 ## Funding
 The development of geosmartcity-marousi is part-funded by the European Commission through the GeoSmartCity project.
 

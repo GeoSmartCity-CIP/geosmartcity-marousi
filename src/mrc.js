@@ -350,3 +350,70 @@ function download(content, filename, contentType)
         a.click();
 }
 
+
+
+if (!window.wps) {
+  window.wps = {};
+}
+var wps = window.wps;
+
+wps.editor = function(ui) {
+  this.ui_ = ui;
+  this.WKT_ = new ol.format.WKT();
+};
+
+var extent = options.bounds;
+
+   
+   var client = new ol.WPSClient({
+        servers: {
+            opengeo: 'http://demo.boundlessgeo.com/geoserver/wps'
+        }
+    });
+    
+    // Create a process and configure it
+   var  intersect = client.getProcess('opengeo', 'JTS:intersection');    
+    intersect.configure({
+        // spatial input can be a feature or a geometry or an array of
+        // features or geometries
+        inputs: {
+            a: features,
+            b: geometry
+        }
+    });
+    
+    // Create another process which chains the previous one and execute it
+  var  buffer = client.getProcess('opengeo', 'JTS:buffer');
+    buffer.execute({
+        inputs: {
+            geom: intersect.output(),
+            distance: 1
+        },
+        success: function(outputs) {
+            // outputs.result is a feature or an array of features for spatial
+            // processes.
+            map.baseLayer.addFeatures(outputs.result);
+        }
+    });
+
+    // Instead of creating a process and executing it, we could call execute on
+    // the client directly if we are only dealing with a single process:
+    /*
+    client.execute({
+        server: "opengeo",
+        process: "JTS:intersection",
+        // spatial input can be a feature or a geometry or an array of
+        // features or geometries
+        inputs: {
+            a: features,
+            b: geometry
+        },
+        success: function(outputs) {
+            // outputs.result is a feature or an array of features for spatial
+            // processes.
+            map.baseLayer.addFeatures(outputs.result);
+        }
+    });
+    */
+
+

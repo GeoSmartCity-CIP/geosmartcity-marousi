@@ -31,7 +31,7 @@ module.exports = function (grunt) {
                     'src/**/*.js'
                 ],
                 dest: 'dist/<%= pkg.name %>.js'
-            },
+            }
         },
         uglify: {
             options: {
