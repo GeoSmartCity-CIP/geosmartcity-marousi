@@ -492,7 +492,7 @@ $(function () {
         }
         if (format == "json") {
             result = gsc.download.json();
-            contentType = 'text/plain';
+            contentType = 'text/javascript';
         }
         if (format == "gml") {
             result = gsc.download.gml(ol.format.GML);
