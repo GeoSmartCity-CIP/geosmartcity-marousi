@@ -2,25 +2,25 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8"> 
+	<meta charset="UTF-8">
 	<title>Geosmartcity Client for Marousi</title>
 	<link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css" />
-	<link href="node_modules/openlayers/dist/ol.css" rel="stylesheet">
-	<link href="node_modules/ol3-layerswitcher/src/ol3-layerswitcher.css" rel="stylesheet" />
-	<link href="node_modules/gsc/dist/gsc.css" rel="stylesheet" />
+	<link href="css/ol.css" rel="stylesheet">
+	<link href="css/ol3-layerswitcher.css" rel="stylesheet" />
+	<link href="css/gsc.css" rel="stylesheet" />
+	<link href="css/theme.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-			crossorigin="anonymous" />
+					crossorigin="anonymous" />
 	<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"
 	/>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
 	<script type="text/javascript" type="text/javascript" src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-	<script type="text/javascript" src="node_modules/openlayers/dist/ol-debug.js"></script>
+	<script type="text/javascript" src="scripts/ol.js"></script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-			crossorigin="anonymous"></script>
+					crossorigin="anonymous"></script>
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.14/proj4.js"></script>
-		<script type="text/javascript" src="node_modules/ol3-layerswitcher/src/ol3-layerswitcher.js"></script>
-		<script type="test/javascript" src="https://raw.githubusercontent.com/boundlessgeo/wps-gui/master/src/wpsclient.js"></script>
+		<script type="text/javascript" src="scripts/ol3-layerswitcher.js"></script>
 		<!--Den douleuei i metafrasi!!!!
 		<script src=https://github.com/i18next/i18next/blob/master/i18next.min.js/>-->
 		<link href="../../dist/mrc.css" rel="stylesheet">
@@ -59,10 +59,15 @@
 	</nav>
 	<div class="navbar-offset"></div>
 	<div id="map"> </div>
+	
 	<!-- Edit pop up sector-->
 	<div id="popup" class="ol-popup">
 		<a href="#" id="popup-closer" class="ol-popup-closer"></a>
 		<div id="popup-content"></div>
+	</div>
+	<div id="popup2" class="ol-popup">
+		<a href="#" id="popup-closer2" class="ol-popup-closer"></a>
+		<div id="popup-content2"></div>
 	</div>
 	<div class="row main-row">
 		<div class="col-sm-4 col-md-3 sidebar sidebar-left pull-left">
@@ -148,42 +153,31 @@
 						</div>
 					</div>
 				</div>
-
-
-
-
 				<div class="panel panel-default">
-              <div class="panel-heading">
-                <h4 class="panel-title">
-                  <a data-toggle="collapse" href="#download ">
-                    <i class="fa fa-list-alt"></i>
-                    Download 
-                  </a>
-                </h4>
-              </div>
-              <div id="download " class="panel-collapse collapse in">
-                <div class="panel-body">                 
-													Select a feature to download
-													</p>
-													Then select the format: 
-													</p>
-												<select id="slcformat" >
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-toggle="collapse" href="#download ">
+								<i class="fa fa-list-alt"></i> Download
+							</a>
+						</h4>
+					</div>
+					<div id="download " class="panel-collapse collapse in">
+						<div class="panel-body">
+							Select a feature to download
+							</p>
+							Then select the format:
+							</p>
+							<select id="slcformat">
 																					<option value="gml">GML</option>
 																					<option value="kml">KML</option>
 																					<option value="wkt">WKT</option>
 																<option value="gpx">GPX</option>
 																					<option value="json">JSON</option>
 																			</select>
-												<button id="btnDownload" class="glyphicon glyphicon-download-alt"></button>
-												</div>
-                </div>
-              </div>
-
-
-
-
-
-
+							<button id="btnDownload" class="glyphicon glyphicon-download-alt"></button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -191,7 +185,22 @@
 	<div id="controls">
 		<span id="coordinate"></span>
 		<span id="scalebar"></span>
-	</div> 
+	</div>
+
+
+	<div id="overlaydddd" class="my-legend">
+		<div class='legend-title'>The Title or Explanation of your Map</div>
+		<div class='legend-scale'>
+  				<ul class='legend-labels'>
+			<li><span style='background:#006600;'></span>&#60;30 kwH/m2</li>
+					<li><span style='background:#00ff80;'></span>31 - 60 kwH/m2</li>
+					<li><span style='background:#b2ffd8;'></span>61 -120 kwH/m2</li>
+					<li><span style='background:#ffff00;'></span>121- 180 kwH/m2</li>
+					<li><span style='background:#ff8000;'></span>181 - 220 kwH/m2</li>
+					<li><span style='background:#ff9999;'></span>221-270 kwH/m2</li>
+					<li><span style='background:#ff0000;'></span>&#62;270 kwH/m2</li>
+		</ul>
+	</div>
 	<!-- Modal  Registration sector-->
 	<div class="modal fade" id="myModal" role="dialog">
 		<div class="modal-dialog">
@@ -285,7 +294,6 @@
 			</div>
 		</div>
 	</div>
-
 	</div>
 </body>
 <script>
@@ -294,7 +302,7 @@
 		title: 'Enter username'
 	});
 </script>
-<script type="text/javascript" src="node_modules/gsc/dist/gsc.js"></script>
+<script type="text/javascript" src="scripts/gsc.js"></script>
 <script type="text/javascript" src="dist/mrc.js"></script>
 
 </html>

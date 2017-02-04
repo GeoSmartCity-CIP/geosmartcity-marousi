@@ -1,3 +1,5 @@
+/*! mrc - v0.0.1 - 2017-02-04
+* Copyright (c) 2017; Licensed  EUPL-1.1 */
 'use strict';
 
 var options = {

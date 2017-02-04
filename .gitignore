@@ -14,8 +14,7 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
-# Distribution
-dist
+
 
 # nyc test coverage
 .nyc_output
@@ -38,3 +37,6 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+index2.html
+
