@@ -510,6 +510,8 @@ function download(content, filename, contentType) {
         'type': contentType
     });
     a.download = filename;
+    a.name = filename;
+    a.type = contentType;
     a.href = window.URL.createObjectURL(blob);    
     a.click();
 }
