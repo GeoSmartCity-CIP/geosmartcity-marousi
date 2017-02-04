@@ -504,14 +504,16 @@ $(function () {
 function download(content, filename, contentType) {
     if (!contentType) contentType = 'application/octet-stream';
     var a = document.createElement('a');
-    var blob = new Blob([content], {
-        type: contentType
-    });
-    a.download = filename;
+        a.download = filename;
     a.name = filename;
     a.type = contentType;
+    var blob = new Blob([content], {
+         type : "octet/stream"
+    });
+
     a.href = window.URL.createObjectURL(blob);    
     a.click();
+    window.URL.revokeObjectURL(url);
 }
 
 
