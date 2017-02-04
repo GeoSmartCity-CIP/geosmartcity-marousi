@@ -507,7 +507,7 @@ function download(content, filename, contentType) {
     if (!contentType) contentType = 'application/octet-stream';
     var a = document.createElement('a');
     var blob = new Blob([content], {
-        'type': contentType
+        type: contentType
     });
     a.download = filename;
     a.name = filename;
