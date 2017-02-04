@@ -1,12 +1,12 @@
 /*! gsc - v0.1.9 - 2016-09-06
-* https://github.com/GeoSmartCity-CIP/gsc-client
-* Copyright (c) 2016; Licensed  EUPL-1.1 */
+ * https://github.com/GeoSmartCity-CIP/gsc-client
+ * Copyright (c) 2016; Licensed  EUPL-1.1 */
 'use strict';
 
 /**
  * @namespace gsc
  */
-var gsc = (function() {
+var gsc = (function () {
 
   /**
    * Version number
@@ -58,7 +58,7 @@ var gsc = (function() {
    * @param {String} [dcUrl] URL to working instance of GSC Datacatalogue
    * @return {String} URL of GSC Datacatalogue instance web service end-point
    */
-  mod.dcUrl = function(dcUrl) {
+  mod.dcUrl = function (dcUrl) {
     if (dcUrl !== undefined) {
       _dcUrl = dcUrl;
     }
@@ -75,7 +75,7 @@ var gsc = (function() {
    * @param {String} [uploadUrl] URL to upload feature API
    * @return {String} URL of upload feature API
    */
-  mod.uploadUrl = function(uploadUrl) {
+  mod.uploadUrl = function (uploadUrl) {
     if (uploadUrl !== undefined) {
       _uploadUrl = uploadUrl;
     }
@@ -89,7 +89,7 @@ var gsc = (function() {
    * @param {Object} requestData  A JSON object with the parameters to send to the web service
    * @return {Promise.<Object>} a jQuery promise object
    */
-  mod.doPost = function(actionName,
+  mod.doPost = function (actionName,
     requestData) {
     return $.post(gsc.dcUrl(), {
       actionName: actionName,
@@ -103,7 +103,7 @@ var gsc = (function() {
 
 'use strict';
 
-gsc.cs = (function() {
+gsc.cs = (function () {
   /**
    *
    * @exports gsc/cs
@@ -121,7 +121,7 @@ gsc.cs = (function() {
    * @param {String} [csUrl] URL to working instance of GSC CrowdSourcing Servlet
    * @return {String} URL of GSC CrowdSourcing instance web service end-point
    */
-  mod.csUrl =  function(csUrl) {
+  mod.csUrl = function (csUrl) {
     if (csUrl !== undefined) {
       mod._csUrl = csUrl;
     }
@@ -133,7 +133,7 @@ gsc.cs = (function() {
    *
    * @return {Promise.<Object>} a jQuery promise object
    */
-  mod.getConfig = function() {
+  mod.getConfig = function () {
     return this.doPost_('/config', null);
   };
 
@@ -143,7 +143,7 @@ gsc.cs = (function() {
    * @param {JSON} data (Username and Password)
    * @return {Promise.<Object>} a jQuery promise object
    */
-  mod.login = function(data) {
+  mod.login = function (data) {
     return this.doPost_('/login', data);
   };
 
@@ -154,7 +154,7 @@ gsc.cs = (function() {
    * @param {String} uuid Identification string of event
    * @return {Promise.<Object>} a jQuery promise object
    */
-  mod.eventComment =  function(data, uuid) {
+  mod.eventComment = function (data, uuid) {
     return this.doPost_('/event/comment/' + uuid, data);
   };
 
@@ -164,7 +164,7 @@ gsc.cs = (function() {
    * @param {JSON} data The JSON data object
    * @return {Promise.<Object>} a jQuery promise object
    */
-  mod.eventUpdate =  function(data) {
+  mod.eventUpdate = function (data) {
     return this.doPost_('/event/change', data);
   };
 
@@ -174,7 +174,7 @@ gsc.cs = (function() {
    * @param {FormData} formdata The FormData object (JSON + attachment)
    * @return {Promise.<Object>} a jQuery promise object
    */
-  mod.eventCreate =  function(formdata) {
+  mod.eventCreate = function (formdata) {
     return this.doPostFormData_('/event/create', formdata);
   };
 
@@ -184,7 +184,7 @@ gsc.cs = (function() {
    * @param {JSON} data The JSON data object
    * @return {Promise.<Object>} a jQuery promise object
    */
-  mod.eventListFilter =  function(data) {
+  mod.eventListFilter = function (data) {
     return this.doPost_('/event/list', data);
   };
 
@@ -197,9 +197,9 @@ gsc.cs = (function() {
    * @return {Promise.<Object>} a jQuery promise object
    *
    */
-  mod.doPost_ =  function(urlPart, data) {
+  mod.doPost_ = function (urlPart, data) {
     return $.ajax({
-      url: mod._csUrl + '/' + urlPart ,
+      url: mod._csUrl + '/' + urlPart,
       type: 'POST',
       data: JSON.stringify(data),
       dataType: 'json'
@@ -215,9 +215,9 @@ gsc.cs = (function() {
    * @return {Promise.<Object>} a jQuery promise object
    *
    */
-  mod.doPostFormData_ =  function(urlPart, formData) {
+  mod.doPostFormData_ = function (urlPart, formData) {
     return $.ajax({
-      url: mod._csUrl + '/' + urlPart ,
+      url: mod._csUrl + '/' + urlPart,
       type: 'POST',
       data: formData,
       processData: false,
@@ -231,7 +231,7 @@ gsc.cs = (function() {
 
 'use strict';
 
-gsc.dataset = (function() {
+gsc.dataset = (function () {
   /**
    * @exports gsc/dataset
    */
@@ -243,7 +243,7 @@ gsc.dataset = (function() {
    * @param {Number} dataSetId - Id of dataset
    * @return {Promise} Response
    */
-  mod.delete = function(dataSetId) {
+  mod.delete = function (dataSetId) {
 
     return gsc.doPost('deletedataset', {
       iddataset: dataSetId
@@ -259,9 +259,9 @@ gsc.dataset = (function() {
    * @param {String} [dataSetName] - Name or part of data set name to search for
    * @return {Promise} Data set response
    */
-  mod.list = function(dataSourceId,
-          dataSetId,
-          dataSetName) {
+  mod.list = function (dataSourceId,
+    dataSetId,
+    dataSetName) {
 
     var params = {};
 
@@ -293,14 +293,14 @@ gsc.dataset = (function() {
    * @param {String} [url=null] - URL
    * @return {Promise.<Object>} Data set response
    */
-  mod.create = function(dataSetName,
-          realName,
-          dataSourceId,
-          description,
-          toBeIngested,
-          refreshInterval,
-          url
-          ) {
+  mod.create = function (dataSetName,
+    realName,
+    dataSourceId,
+    description,
+    toBeIngested,
+    refreshInterval,
+    url
+  ) {
     if (toBeIngested === undefined) {
       toBeIngested = false;
     }
@@ -340,16 +340,16 @@ gsc.dataset = (function() {
    * @param {String} [url=null] - URL
    * @return {Promise.<Object>} Update data set response
    */
-  mod.update = function(
-          dataSetId,
-          dataSetName,
-          realName,
-          dataSourceId,
-          description,
-          toBeIngested,
-          refreshInterval,
-          url
-          ) {
+  mod.update = function (
+    dataSetId,
+    dataSetName,
+    realName,
+    dataSourceId,
+    description,
+    toBeIngested,
+    refreshInterval,
+    url
+  ) {
 
     if (toBeIngested === undefined) {
       toBeIngested = false;
@@ -384,7 +384,7 @@ gsc.dataset = (function() {
    * @param {Number} dataSetId - Identifier of dataset
    * @return {Promise.<Object>} Data set response
    */
-  mod.listCols = function(dataSetId) {
+  mod.listCols = function (dataSetId) {
     return gsc.doPost('listcols', {
       iddataset: dataSetId
     });
@@ -397,16 +397,15 @@ gsc.dataset = (function() {
    * @param {Object[]} columnList - List of column objects
    * @returns {Promise.<Object>}
    */
-  mod.updateCols = function(dataSetId, columnList) {
+  mod.updateCols = function (dataSetId, columnList) {
     return gsc.doPost('updcolsmetadata', {
       iddataset: dataSetId,
       columns: columnList
     });
   };
 
-  mod.createCron = function(dataSetId) {
-    return gsc.doPost('createcron', {
-    });
+  mod.createCron = function (dataSetId) {
+    return gsc.doPost('createcron', {});
   };
 
   return mod;
@@ -414,7 +413,7 @@ gsc.dataset = (function() {
 
 'use strict';
 
-gsc.datasource = (function() {
+gsc.datasource = (function () {
 
   /**
    * @exports gsc/datasource
@@ -460,7 +459,7 @@ gsc.datasource = (function() {
    * @property {string} [path] - Path to local datasource directory, name of database
    * @class
    */
-  mod.Datasource = function() {
+  mod.Datasource = function () {
 
   };
 
@@ -482,7 +481,7 @@ gsc.datasource = (function() {
    * @return {Promise.<gsc.datasource.DataSource>} [description]
    * @public
    */
-  mod.create = function(datasourcename,
+  mod.create = function (datasourcename,
     organization,
     type,
     description,
@@ -522,7 +521,7 @@ gsc.datasource = (function() {
    * @param {Boolean} [includeDetail=false] Whether to include details
    * @return {Promise.<Object>} A list of datasource objects
    */
-  mod.list = function(
+  mod.list = function (
     datasourceId,
     organization,
     datasourceName,
@@ -563,7 +562,7 @@ gsc.datasource = (function() {
    * @param {number} datasourceId - Identifier of datasource to be deleted
    * @return {Promise.<Object>} The deleted datasource
    */
-  mod.delete = function(datasourceId) {
+  mod.delete = function (datasourceId) {
     return gsc.doPost('deletedatasrc', {
       iddatasource: datasourceId
     });
@@ -587,7 +586,7 @@ gsc.datasource = (function() {
    * @param {String} path [description]
    * @return {Promise.<Response>} [description]
    */
-  mod.update = function(datasourceId,
+  mod.update = function (datasourceId,
     datasourcename,
     organization,
     type,
@@ -623,7 +622,7 @@ gsc.datasource = (function() {
    * @param {number} datasourceId The id of the data source to list origin for
    * @return {Promise.<Response>} A response object
    */
-  mod.listDataOrigin = function(datasourceId) {
+  mod.listDataOrigin = function (datasourceId) {
 
     return gsc.doPost('listdataorigin', {
       iddatasource: datasourceId
@@ -637,7 +636,7 @@ gsc.datasource = (function() {
 
 'use strict';
 
-gsc.download = (function() {
+gsc.download = (function () {
   /**
    * @exports gsc/download
    */
@@ -658,7 +657,7 @@ gsc.download = (function() {
   /** @type ol.interaction.DragBox */
   mod.dragBox = null;
 
-  mod.create = function(map, layer) {
+  mod.create = function (map, layer) {
     mod.olMap = map;
     mod.layer = layer;
     mod.select = new ol.interaction.Select();
@@ -674,35 +673,36 @@ gsc.download = (function() {
     });
     mod.olMap.addInteraction(mod.dragBox);
 
-    mod.dragBox.on('boxend', function() {
+    mod.dragBox.on('boxend', function () {
       var extent = mod.dragBox.getGeometry().getExtent();
       mod.layer.getSource().forEachFeatureIntersectingExtent(
-          extent, function(feature) {
-            mod.selectedFeatures.push(feature);
-          });
+        extent,
+        function (feature) {
+          mod.selectedFeatures.push(feature);
+        });
     });
 
-    mod.dragBox.on('boxstart', function() {
+    mod.dragBox.on('boxstart', function () {
       mod.selectedFeatures.clear();
     });
-    mod.olMap.on('click', function() {
+    mod.olMap.on('click', function () {
       mod.selectedFeatures.clear();
     });
   };
 
-  mod.addLayer = function(layer) {
+  mod.addLayer = function (layer) {
     mod.removeLayer();
     mod.layer = layer;
   };
 
-  mod.removeLayer = function() {
+  mod.removeLayer = function () {
     mod.layer = null;
   };
 
   /**
    * @returns {string} .kml string
    */
-  mod.kml = function() {
+  mod.kml = function () {
     var kml = new ol.format.KML();
     return kml.writeFeatures(mod.selectedFeatures.getArray());
   };
@@ -711,14 +711,14 @@ gsc.download = (function() {
    * @param {ol.format.GML} gml
    * @returns {string} .gml string
    */
-  mod.gml = function(gml) {
+  mod.gml = function (gml) {
     return gml.writeFeatures(mod.selectedFeatures.getArray());
   };
 
   /**
    * @returns {string} .gpx string
    */
-  mod.gpx = function() {
+  mod.gpx = function () {
     var gpx = new ol.format.GPX();
     return gpx.writeFeatures(mod.selectedFeatures.getArray());
   };
@@ -726,7 +726,7 @@ gsc.download = (function() {
   /**
    * @returns {string} .json string
    */
-  mod.json = function() {
+  mod.json = function () {
     var json = new ol.format.GeoJSON();
     return json.writeFeatures(mod.selectedFeatures.getArray());
   };
@@ -734,7 +734,7 @@ gsc.download = (function() {
   /**
    * @returns {string} .wkt string
    */
-  mod.wkt = function() {
+  mod.wkt = function () {
     var wkt = new ol.format.WKT();
     return wkt.writeFeatures(mod.selectedFeatures.getArray());
   };
@@ -745,7 +745,7 @@ gsc.download = (function() {
 // jscs:disable disallowTrailingWhitespace
 'use strict';
 
-gsc.editFeatures = (function() {
+gsc.editFeatures = (function () {
   /**
    * @exports gsc/editFeatures
    */
@@ -809,8 +809,8 @@ gsc.editFeatures = (function() {
 
   mod.interactionSnap = null;
 
-  mod.create = function(divContainer, divContent, aCloser,
-                        classButton, mapObject, wfs) {
+  mod.create = function (divContainer, divContent, aCloser,
+    classButton, mapObject, wfs) {
 
     mod.container = divContainer;
 
@@ -829,7 +829,7 @@ gsc.editFeatures = (function() {
     /**
      * Create an overlay to anchor the popup to the map.
      */
-    mod.overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+    mod.overlay = new ol.Overlay( /** @type {olx.OverlayOptions} */ ({
       element: mod.container.get(0),
       autoPan: true,
       autoPanAnimation: {
@@ -853,33 +853,33 @@ gsc.editFeatures = (function() {
      *
      * @return {boolean} Don't follow the href.
      */
-    mod.closer.click(function() {
+    mod.closer.click(function () {
       mod.overlay.setPosition(undefined);
       mod.closer.blur();
       return false;
     });
   };
 
-  mod.addLayer = function(layer, gml) {
+  mod.addLayer = function (layer, gml) {
     mod.removeLayer();
     mod.layer = layer;
     mod.changeSnapLayer();
     mod.formatGML = gml;
   };
 
-  mod.removeLayer = function() {
+  mod.removeLayer = function () {
     mod.layer = null;
     mod.formatGML = null;
   };
 
-  mod.changeSnapLayer = function() {
+  mod.changeSnapLayer = function () {
     mod.interactionSnap = new ol.interaction.Snap({
       pixelTolerance: 5,
       source: mod.layer.getSource()
     });
   };
 
-  mod.transactWFS = function(mode, f) {
+  mod.transactWFS = function (mode, f) {
     var node;
     switch (mode) {
       case 'insert':
@@ -887,7 +887,7 @@ gsc.editFeatures = (function() {
         break;
       case 'update':
         var sF = f.clone();
-        sF.getGeometry().applyTransform(function(crd, crd2, std) {
+        sF.getGeometry().applyTransform(function (crd, crd2, std) {
           for (var i = 0; i < crd.length; i += std) {
             var y = crd[i];
             var x = crd[i + 1];
@@ -910,12 +910,12 @@ gsc.editFeatures = (function() {
       processData: false,
       contentType: 'text/xml',
       data: payload
-    }).done(function() {
+    }).done(function () {
       mod.layer.getSource().clear();
     });
   };
 
-  $('button').click(function() {
+  $('button').click(function () {
     mod.olMap.removeInteraction(mod.interaction);
     mod.interactionMultipleSelect.getFeatures().clear();
     mod.interactionSingleSelect.getFeatures().clear();
@@ -932,12 +932,12 @@ gsc.editFeatures = (function() {
         mod.olMap.addInteraction(mod.interaction);
         mod.olMap.addInteraction(mod.interactionSnap);
         mod.editingFeature = {};
-        mod.interactionMultipleSelect.getFeatures().on('add', function(e) {
-          e.element.on('change', function(e) {
+        mod.interactionMultipleSelect.getFeatures().on('add', function (e) {
+          e.element.on('change', function (e) {
             mod.editingFeature[e.target.getId()] = true;
           });
         });
-        mod.interactionMultipleSelect.getFeatures().on('remove', function(e) {
+        mod.interactionMultipleSelect.getFeatures().on('remove', function (e) {
           var f = e.element;
           if (mod.editingFeature[f.getId()]) {
             delete mod.editingFeature[f.getId()];
@@ -952,43 +952,43 @@ gsc.editFeatures = (function() {
 
       case 'btnEditAttributes':
         mod.olMap.addInteraction(mod.interactionSingleSelect);
-        mod.interactionSingleSelect.on('select', function(evt) {
+        mod.interactionSingleSelect.on('select', function (evt) {
           if (evt.selected.length == 1) {
             mod.selectedFeature = evt.selected[0];
             mod.popupContent = '';
             attTitle = [];
             mod.popupContent = '<table id="feature" ' +
-                'class="table table-bordered table-hover" ' +
-                'style="clear: both"><tbody>';
+              'class="table table-bordered table-hover" ' +
+              'style="clear: both"><tbody>';
             Object.getOwnPropertyNames(mod.selectedFeature.getProperties()).
-            forEach(function(val, idx, array) {
+            forEach(function (val, idx, array) {
               if (val != 'bbox' && val != 'geometry') {
                 var i = 0;
                 attTitle.push(val);
                 mod.popupContent += '<tr>' +
-                    '<td width="35%">' + val + '</td>' +
-                    '<td width="65%">' +
-                    '<a href="#" id="' + val + '" class="edit' + i + '" ' +
-                    'data-type="text">' + mod.selectedFeature.
-                    getProperties()[val] +
-                    '</a>' +
-                    '</td>' +
-                    '</tr>';
+                  '<td width="35%">' + val + '</td>' +
+                  '<td width="65%">' +
+                  '<a href="#" id="' + val + '" class="edit' + i + '" ' +
+                  'data-type="text">' + mod.selectedFeature.
+                getProperties()[val] +
+                  '</a>' +
+                  '</td>' +
+                  '</tr>';
                 i++;
               }
             });
             mod.popupContent += '</tbody></table><script>';
             mod.popupContent += '$.fn.editable.defaults.mode = "inline";';
             mod.popupContent += '$(document).ready(function() {';
-            attTitle.forEach(function(val, idx, array) {
+            attTitle.forEach(function (val, idx, array) {
               mod.popupContent += '	$(".edit' + idx + '").editable({';
               mod.popupContent += 'type: "text",';
               mod.popupContent += 'title: "' + attTitle[idx] + '",';
               mod.popupContent += 'success: function(response, newValue) {';
               mod.popupContent += 'gsc.editFeatures.selectedFeature.set("' +
-                  attTitle[idx] + '", newValue, false);';
+                attTitle[idx] + '", newValue, false);';
               mod.popupContent += 'gsc.editFeatures.transactWFS("update", ' +
-                  'gsc.editFeatures.selectedFeature);';
+                'gsc.editFeatures.selectedFeature);';
               mod.popupContent += '}';
               mod.popupContent += '})';
             });
@@ -1008,7 +1008,7 @@ gsc.editFeatures = (function() {
         });
         mod.olMap.addInteraction(mod.interaction);
         mod.olMap.addInteraction(mod.interactionSnap);
-        mod.interaction.on('drawend', function(e) {
+        mod.interaction.on('drawend', function (e) {
           mod.transactWFS('insert', e.feature);
         });
         break;
@@ -1020,7 +1020,7 @@ gsc.editFeatures = (function() {
         });
         mod.olMap.addInteraction(mod.interaction);
         mod.olMap.addInteraction(mod.interactionSnap);
-        mod.interaction.on('drawend', function(e) {
+        mod.interaction.on('drawend', function (e) {
           mod.transactWFS('insert', e.feature);
         });
         break;
@@ -1030,7 +1030,7 @@ gsc.editFeatures = (function() {
           type: 'Polygon',
           source: mod.layer.getSource()
         });
-        mod.interaction.on('drawend', function(e) {
+        mod.interaction.on('drawend', function (e) {
           mod.transactWFS('insert', e.feature);
         });
         mod.olMap.addInteraction(mod.interaction);
@@ -1039,7 +1039,7 @@ gsc.editFeatures = (function() {
 
       case 'btnDelete':
         mod.interaction = new ol.interaction.Select();
-        mod.interaction.getFeatures().on('add', function(e) {
+        mod.interaction.getFeatures().on('add', function (e) {
           mod.transactWFS('delete', e.target.item(0));
           mod.interactionMultipleSelectPointerMove.getFeatures().clear();
           mod.interaction.getFeatures().clear();
@@ -1066,7 +1066,7 @@ gsc.geocode = gsc.geocode || {};
  *
  * @param {String[]} geonames An array of one or more geonames
  */
-gsc.geocode.geocode = function(geonames) {
+gsc.geocode.geocode = function (geonames) {
 
   // pseudo code
   // lookup coordinate based on name
@@ -1087,7 +1087,7 @@ gsc.geocode.geocode = function(geonames) {
  * @param {Number} lon Longitude
  * @param {Number} srs Spatial reference system code (EPSG)
  */
-gsc.geocode.reverseGeocode = function(lat, lon, srs) {
+gsc.geocode.reverseGeocode = function (lat, lon, srs) {
 
   // pseudo code
   // lookup name based on location
@@ -1118,7 +1118,7 @@ var gsc = gsc || {};
  * @class
  * @memberof gsc
  */
-gsc.Response = function(status, description) {
+gsc.Response = function (status, description) {
 
   if (status === undefined) {
     status = 'error';
@@ -1137,7 +1137,7 @@ gsc.Response = function(status, description) {
 
 'use strict';
 
-gsc.layer = (function() {
+gsc.layer = (function () {
 
   /**
    * @exports gsc/layer
@@ -1154,11 +1154,11 @@ gsc.layer = (function() {
    * @param {String} sld - SLD XML
    * @returns {Promise.<Object>}
    */
-  mod.create = function(layerName,
-      dataSetId,
-      description,
-      metadataFile,
-      sld) {
+  mod.create = function (layerName,
+    dataSetId,
+    description,
+    metadataFile,
+    sld) {
 
     return gsc.doPost('createlyr', {
       layername: layerName,
@@ -1181,12 +1181,12 @@ gsc.layer = (function() {
    * @param {String} sld - SLD XML
    * @returns {Promise.<Object>}
    */
-  mod.update = function(layerId,
-      layerName,
-      dataSetId,
-      description,
-      metadataFile,
-      sld) {
+  mod.update = function (layerId,
+    layerName,
+    dataSetId,
+    description,
+    metadataFile,
+    sld) {
 
     return gsc.doPost('updatelyr', {
       idlayer: layerId,
@@ -1205,7 +1205,7 @@ gsc.layer = (function() {
    * @param {Number} layerId - The identifier of the layer to delete
    * @returns {Promise.<Object>}
    */
-  mod.delete = function(layerId) {
+  mod.delete = function (layerId) {
     return gsc.doPost('deletelyr', {
       idlayer: layerId
     });
@@ -1219,9 +1219,9 @@ gsc.layer = (function() {
    * @param {type} [layerName=null] - The name or partial name of layers to be retrieved
    * @returns {jqXHR|!jQuery.jqXHR|Promise.<Object>}
    */
-  mod.list = function(dataSetId,
-      layerId,
-      layerName) {
+  mod.list = function (dataSetId,
+    layerId,
+    layerName) {
 
     var param = {};
 
@@ -1247,7 +1247,7 @@ gsc.layer = (function() {
 
 'use strict';
 
-gsc.map = (function() {
+gsc.map = (function () {
 
   /**
    * @exports gsc/map
@@ -1268,7 +1268,7 @@ gsc.map = (function() {
    * @param {divObject} divObject is the map div
    * @param {mapOptions} mapOptions are the map options
    */
-  mod.create  = function(divObject, mapOptions) {
+  mod.create = function (divObject, mapOptions) {
     mod.mapOptions_ = mapOptions;
     mod.layers_ = mapOptions.layers || [];
 
@@ -1298,7 +1298,7 @@ gsc.map = (function() {
    *
    * @param {ol.layer} layer layer to show in map
    */
-  mod.addLayer = function(layer) {
+  mod.addLayer = function (layer) {
     mod.olMap.addLayer(layer);
     mod.layers_.push(layer);
   };
@@ -1308,7 +1308,7 @@ gsc.map = (function() {
    *
    * @return {element} DOM element of viewport
    */
-  mod.getDomElement = function() {
+  mod.getDomElement = function () {
     return $(mod.olMap.getViewport());
   };
 
@@ -1317,7 +1317,7 @@ gsc.map = (function() {
    *
    * @return {ol.map} map object
    */
-  mod.getOlMap = function() {
+  mod.getOlMap = function () {
     return mod.olMap;
   };
 
@@ -1325,8 +1325,8 @@ gsc.map = (function() {
    * Redraw all layers
    *
    */
-  mod.redraw = function() {
-    mod.olMap.getLayers().forEach(function(lyr) {
+  mod.redraw = function () {
+    mod.olMap.getLayers().forEach(function (lyr) {
       lyr.redraw();
     });
   };
@@ -1335,9 +1335,9 @@ gsc.map = (function() {
    * Remove layer from map
    *
    */
-  mod.removeLayer = function(layer) {
+  mod.removeLayer = function (layer) {
     mod.olMap.removeLayer(layer);
-    mod.layers_ = mod.layers_.filter(function(value) {
+    mod.layers_ = mod.layers_.filter(function (value) {
       return value !== layer;
     });
   };
@@ -1347,22 +1347,22 @@ gsc.map = (function() {
    *
    * @param {el.extent} bounds
    */
-  mod.fit = function(bounds) {
+  mod.fit = function (bounds) {
     mod.olMap.getView().fit(bounds, mod.olMap.getSize());
   };
 
-  mod.addMousePositionControl = function(location) {
+  mod.addMousePositionControl = function (location) {
     var mousePositionControl = new ol.control.MousePosition({
-        className: 'custom-mouse-position',
-        target: document.getElementById(location),
-        coordinateFormat: ol.coordinate.createStringXY(5),
-        undefinedHTML: '&nbsp;'
-      });
+      className: 'custom-mouse-position',
+      target: document.getElementById(location),
+      coordinateFormat: ol.coordinate.createStringXY(5),
+      undefinedHTML: '&nbsp;'
+    });
     mod.olMap.addControl(mousePositionControl);
   };
 
-  mod.addScaleBarControl = function(scalediv) {
-    mod.olMap.getView().on('change:resolution', function(evt) {
+  mod.addScaleBarControl = function (scalediv) {
+    mod.olMap.getView().on('change:resolution', function (evt) {
       var resolution = evt.target.get('resolution');
       var units = mod.olMap.getView().getProjection().getUnits();
       var dpi = 25.4 / 0.28;
@@ -1382,24 +1382,24 @@ gsc.map = (function() {
     mod.olMap.getView().setZoom(mod.olMap.getView().getZoom() - 1);
   };
 
-  mod.infoOnFeatureEvent = function(evt) {
+  mod.infoOnFeatureEvent = function (evt) {
     document.getElementById(this.nodelist).innerHTML = 'Loading... please ' +
-    'wait...';
+      'wait...';
     var view = mod.olMap.getView();
     var viewResolution = view.getResolution();
     var source = this.layer.getSource();
     var url = source.getGetFeatureInfoUrl(
-      evt.coordinate, viewResolution, view.getProjection(),
-      {'INFO_FORMAT': 'text/html',
-             'FEATURE_COUNT': this.maxFeaturesNumber
+      evt.coordinate, viewResolution, view.getProjection(), {
+        'INFO_FORMAT': 'text/html',
+        'FEATURE_COUNT': this.maxFeaturesNumber
       });
     if (url) {
       document.getElementById(this.nodelist).innerHTML = '<iframe seamless ' +
-      'src="' + url + '"></iframe>';
+        'src="' + url + '"></iframe>';
     }
   };
 
-  mod.addInfoOnFeatureEvent = function(nodelist, maxFeaturesNumber, layer) {
+  mod.addInfoOnFeatureEvent = function (nodelist, maxFeaturesNumber, layer) {
     var opts = {
       nodelist: nodelist,
       maxFeaturesNumber: maxFeaturesNumber,
@@ -1408,17 +1408,17 @@ gsc.map = (function() {
     mod.olMap.on('singleclick', mod.infoOnFeatureEvent, opts);
   };
 
-  mod.removeInfoOnFeatureEvent = function() {
+  mod.removeInfoOnFeatureEvent = function () {
     mod.olMap.on('singleclick', mod.infoOnFeatureEvent);
   };
 
-  mod.filterOnAttributes = function(filterType, filter) {
+  mod.filterOnAttributes = function (filterType, filter) {
     // by default, reset all filters
     var filterParams = {
-          'FILTER': null,
-          'CQL_FILTER': null,
-          'FEATUREID': null
-        };
+      'FILTER': null,
+      'CQL_FILTER': null,
+      'FEATUREID': null
+    };
     if (filter.replace(/^\s\s*/, '').replace(/\s\s*$/, '') !== '') {
       if (filterType === 'cql') {
         filterParams.CQL_FILTER = filter;
@@ -1431,13 +1431,18 @@ gsc.map = (function() {
       }
     }
     // merge the new filter definitions
-    mod.olMap.getLayers().forEach(function(lyr) {
-            lyr.getSource().updateParams(filterParams);
-          });
+    mod.olMap.getLayers().forEach(function (lyr) {
+      lyr.getLayers().forEach(function (layer) {
+        var source = layer.getSource()
+        if(source instanceof ol.source.Image){
+          source.updateParams(filterParams);
+        }
+      });
+    });
   };
 
-  mod.resetFilter = function() {
-    mod.filterOnAttributes('cql','');
+  mod.resetFilter = function () {
+    mod.filterOnAttributes('cql', '');
   };
 
   return mod;
@@ -1445,7 +1450,7 @@ gsc.map = (function() {
 }());
 
 'use strict';
-gsc.organization = (function() {
+gsc.organization = (function () {
 
   /**
    * @exports gsc/organization
@@ -1459,7 +1464,7 @@ gsc.organization = (function() {
    * @param {type} description
    * @returns {Promise.<Object>}
    */
-  mod.create = function(organizationname, description) {
+  mod.create = function (organizationname, description) {
     return gsc.doPost('createorg', {
       organizationname: organizationname,
       description: description
@@ -1472,7 +1477,7 @@ gsc.organization = (function() {
    * @param {type} [organizationname] - Optionally name of organization
    * @returns {Promise.<Object>}
    */
-  mod.list = function(organizationname) {
+  mod.list = function (organizationname) {
     var param = {};
     if (organizationname !== null && organizationname !== undefined) {
       param.organizationname = organizationname;
@@ -1486,7 +1491,7 @@ gsc.organization = (function() {
    * @param {type} organizationId
    * @returns {Promise.<Object>}
    */
-  mod.delete = function(organizationId) {
+  mod.delete = function (organizationId) {
     return gsc.doPost('deleteorg', {
       idorganization: organizationId
     });
@@ -1500,7 +1505,7 @@ gsc.organization = (function() {
    * @param {type} description
    * @returns {jqXHR|!jQuery.jqXHR|Promise.<Object>}
    */
-  mod.update = function(organizationId, organizationname, description) {
+  mod.update = function (organizationId, organizationname, description) {
     return gsc.doPost('updateorg', {
       idorganization: organizationId,
       organizationname: organizationname,
@@ -1526,16 +1531,16 @@ gsc.routing = gsc.routing || {};
  * @param {double} x2 coordinate of the end point
  * @param {double} y2 coordinate of the end point
  */
-gsc.routing.routing = function(x1, y1, x2, y2) {
+gsc.routing.routing = function (x1, y1, x2, y2) {
 
   var RoutingUrl = 'http:/hub.geosmartcity.eu' +
-  //var RoutingUrl = 'http://localhost:8080' +
-   '/GironaRouting/geo/RestService/getroute?';
+    //var RoutingUrl = 'http://localhost:8080' +
+    '/GironaRouting/geo/RestService/getroute?';
 
-  RoutingUrl += ('x1=' + x1 + '&y1=' + y1 + '&x2=' + x2 + '&y2=' +  y2);
+  RoutingUrl += ('x1=' + x1 + '&y1=' + y1 + '&x2=' + x2 + '&y2=' + y2);
   console.log(RoutingUrl);
 
-  var	vectorLayer = new ol.layer.Vector({
+  var vectorLayer = new ol.layer.Vector({
     source: new ol.source.Vector({
       url: RoutingUrl,
       format: new ol.format.GeoJSON()
@@ -1569,9 +1574,9 @@ gsc.upload = {
   fileSize: 8000000
 };
 
-gsc.upload.uploadForm = function(selector) {
+gsc.upload.uploadForm = function (selector) {
   var html =
-      `<div class='upload'>
+    `<div class='upload'>
         <form role='form'>
           <h4>Upload file</h4>
           <div class='upload-file'>
@@ -1645,11 +1650,11 @@ gsc.upload.uploadForm = function(selector) {
             id='progressbar' style='min-width: 2em; width: 0'>0%</div>
         </div>
         <div class='alert collapse' id='alert' role='alert'>...</div>
-      </div>`      ;
+      </div>`;
   jQuery(selector).html(html);
 
   var script =
-      `<script>
+    `<script>
       jQuery(document).on('change', '.btn-file :file', function() {
         var input = jQuery(this); 
         var label = input.val();
@@ -1723,8 +1728,8 @@ gsc.upload.uploadForm = function(selector) {
         var dataToProcess = new gsc.upload.Data(fileToProcess, epsg, height, inspireIdLoc, inspireIdName);
         dataToProcess.send(progressCallback, successCallback, failedCallback);
       });
-      </script>`      ;
-  jQuery(function() {
+      </script>`;
+  jQuery(function () {
     jQuery('head').append(script);
   });
 
@@ -1773,7 +1778,7 @@ gsc.upload.uploadForm = function(selector) {
  * @param {String} [inspireIdName] Field that contains the namespace for Inspire
  * @constructor
  */
-gsc.upload.Data = function(file, epsg, height, inspireIdLoc, inspireIdName) {
+gsc.upload.Data = function (file, epsg, height, inspireIdLoc, inspireIdName) {
   /**
    * File to send
    * @type {File}
@@ -1811,7 +1816,7 @@ gsc.upload.Data = function(file, epsg, height, inspireIdLoc, inspireIdName) {
  * @name gsc.upload.Data#name
  */
 Object.defineProperty(gsc.upload.Data.prototype, 'name', {
-  get: function() {
+  get: function () {
     return this.file && this.file.name;
   }
 });
@@ -1823,7 +1828,7 @@ Object.defineProperty(gsc.upload.Data.prototype, 'name', {
  * @name gsc.upload.Data#lastModifiedDate
  */
 Object.defineProperty(gsc.upload.Data.prototype, 'lastModifiedDate', {
-  get: function() {
+  get: function () {
     return this.file && this.file.lastModifiedDate;
   }
 });
@@ -1834,7 +1839,7 @@ Object.defineProperty(gsc.upload.Data.prototype, 'lastModifiedDate', {
  * @name gsc.upload.Data#size
  */
 Object.defineProperty(gsc.upload.Data.prototype, 'size', {
-  get: function() {
+  get: function () {
     return this.file && this.file.size;
   }
 });
@@ -1846,7 +1851,7 @@ Object.defineProperty(gsc.upload.Data.prototype, 'size', {
  * @name gsc.upload.Data#type
  */
 Object.defineProperty(gsc.upload.Data.prototype, 'type', {
-  get: function() {
+  get: function () {
     return this.file && this.file.type;
   }
 });
@@ -1857,7 +1862,7 @@ Object.defineProperty(gsc.upload.Data.prototype, 'type', {
  *
  * @returns {Boolean} True if file size is smaller or equals to config
  */
-gsc.upload.Data.prototype.isFileSizeCorrect = function() {
+gsc.upload.Data.prototype.isFileSizeCorrect = function () {
   return (this.size <= gsc.upload.fileSize);
 };
 
@@ -1888,7 +1893,7 @@ gsc.upload.Data.prototype.isFileSizeCorrect = function() {
  * @param {successCallback} sc Callback that handles upload success
  * @param {failedCallback} fc Callback that handles upload failure
  */
-gsc.upload.Data.prototype.send = function(pc, sc, fc) {
+gsc.upload.Data.prototype.send = function (pc, sc, fc) {
   if (this.isFileSizeCorrect()) {
     var formData = new FormData();
     formData.append('file', this.file, this.name);
@@ -1898,17 +1903,17 @@ gsc.upload.Data.prototype.send = function(pc, sc, fc) {
     formData.append('fieldInspireIdName', this.inspireIdName);
     var request = new XMLHttpRequest();
     if (pc || typeof pc === 'function') {
-      request.upload.addEventListener('progress', function(e) {
+      request.upload.addEventListener('progress', function (e) {
         pc(parseInt(e.loaded / e.total * 100));
       }, false);
     }
     if (sc || typeof sc === 'function') {
-      request.upload.addEventListener('load', function(e) {
+      request.upload.addEventListener('load', function (e) {
         sc(e);
       }, false);
     }
     if (fc || typeof fc === 'function') {
-      request.upload.addEventListener('error', function() {
+      request.upload.addEventListener('error', function () {
         if (request.status === 400) {
           fc('Format not supported');
         } else {
@@ -1923,7 +1928,7 @@ gsc.upload.Data.prototype.send = function(pc, sc, fc) {
 
 'use strict';
 
-gsc.user = (function() {
+gsc.user = (function () {
 
   /**
    *
@@ -1941,7 +1946,7 @@ gsc.user = (function() {
    * @param {Object[]} organizations [description]
    * @return {Promise.<Object>} [description]
    */
-  mod.register = function(email,
+  mod.register = function (email,
     username,
     password,
     confirmpassword,
@@ -1964,7 +1969,7 @@ gsc.user = (function() {
    * @param {string} password - Password
    * @return {Promise.<Response.<User>>} User object
    */
-  mod.login = function(username, password) {
+  mod.login = function (username, password) {
     return gsc.doPost('login', {
       username: username,
       password: password
@@ -1978,7 +1983,7 @@ gsc.user = (function() {
    * @param {String} password Password
    * @return {Promise.<Object>}
    */
-  mod.delete = function(username, password) {
+  mod.delete = function (username, password) {
     return gsc.doPost('unreguser', {
       username: username,
       password: password
@@ -1993,7 +1998,7 @@ gsc.user = (function() {
    * @param {string} username - Username of user to get reminder for
    * @return {Promise} [description]
    */
-  mod.remindPassword = function(email, username) {
+  mod.remindPassword = function (email, username) {
 
     var params = {};
 
@@ -2016,7 +2021,7 @@ gsc.user = (function() {
    * @param {string} confirmnewpassword [description]
    * @return {Promise} [description]
    */
-  mod.changePassword = function(username,
+  mod.changePassword = function (username,
     oldpassword,
     newpassword,
     confirmnewpassword) {
@@ -2036,7 +2041,7 @@ gsc.user = (function() {
    * @param {number} userId Id of user to update
    * @return {Promise.<Object>} Updated user object
    */
-  mod.update = function(userId, email, username, organizations) {
+  mod.update = function (userId, email, username, organizations) {
 
     return gsc.doPost('updateuser', {
       id: userId,
@@ -2054,7 +2059,7 @@ gsc.user = (function() {
    * @param {boolean} [lock=true] Boolean flag to lock user
    * @return {Promise.<Object>}
    */
-  mod.lock = function(username, lock) {
+  mod.lock = function (username, lock) {
 
     if (lock === undefined) {
       lock = true;
@@ -2073,7 +2078,7 @@ gsc.user = (function() {
    * @param {number} verificationId Id to confirm - sent to registerred email
    * @return {Promise.<Object>}
    */
-  mod.verifyEmail = function(verificationId) {
+  mod.verifyEmail = function (verificationId) {
 
     return gsc.doPost('verifymail', {
       id: verificationId
@@ -2097,14 +2102,14 @@ gsc.usrdat = gsc.usrdat || {};
  * @param {gsc.usrdat.Location} location A location to store
  * @return {gsc.usrdat.Location} The inserted location
  */
-gsc.usrdat.storeLocation = function(location) {
+gsc.usrdat.storeLocation = function (location) {
 
   return {
 
   };
 };
 
-gsc.usrdat.storeRoute = function(route) {
+gsc.usrdat.storeRoute = function (route) {
 
 };
 
@@ -2119,7 +2124,7 @@ gsc.util = gsc.util || {};
  * @return {Promise.<gsc.Response>} [description]
  * @memberof gsc.util
  */
-gsc.util.errorPromise = function(message) {
+gsc.util.errorPromise = function (message) {
   var p = jQuery.Deferred();
   p.resolve(new gsc.Response('error', message));
   return p;
@@ -2135,10 +2140,10 @@ gsc.util = gsc.util || {};
  * @param {Array|Object|null|undefined} arrayCandidate
  * @returns {Boolean} True if array with >= 1 entry, false otherwise
  */
-gsc.util.isArrayWithContent = function(arrayCandidate) {
+gsc.util.isArrayWithContent = function (arrayCandidate) {
   if (arrayCandidate !== undefined &&
-          jQuery.isArray(arrayCandidate) &&
-          arrayCandidate.length > 0) {
+    jQuery.isArray(arrayCandidate) &&
+    arrayCandidate.length > 0) {
     return true;
   } else {
     return false;
@@ -2152,7 +2157,7 @@ gsc.util.isArrayWithContent = function(arrayCandidate) {
  * @param {Object[]} targetArray
  * @param {Object[]} sourceArray
  */
-gsc.util.clearExtendArray = function(targetArray, sourceArray) {
+gsc.util.clearExtendArray = function (targetArray, sourceArray) {
   targetArray.length = 0;
   jQuery.extend(targetArray, sourceArray);
 };
@@ -2164,8 +2169,8 @@ gsc.util.clearExtendArray = function(targetArray, sourceArray) {
  * @param {type} targetObject
  * @param {type} sourceObject
  */
-gsc.util.clearExtendObject = function(targetObject, sourceObject) {
-  jQuery.each(targetObject, function(key, value) {
+gsc.util.clearExtendObject = function (targetObject, sourceObject) {
+  jQuery.each(targetObject, function (key, value) {
     targetObject[key] = undefined;
   });
   jQuery.extend(targetObject, sourceObject);
@@ -2186,7 +2191,7 @@ gsc.util = gsc.util || {};
  * false if response status is not 'error' or missing
  * @memberof gsc.util
  */
-gsc.util.isError = function(response) {
+gsc.util.isError = function (response) {
 
   if (response.status !== undefined && response.status === 'error') {
     return true;
@@ -2207,7 +2212,7 @@ gsc.util = gsc.util || {};
  * @return {Boolean} True if null, false if non-null
  * @memberof gsc.util
  */
-gsc.util.isNull = function(mvar) {
+gsc.util.isNull = function (mvar) {
 
   if (mvar !== undefined && mvar !== null) {
     return false;

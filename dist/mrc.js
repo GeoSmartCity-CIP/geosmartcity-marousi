@@ -474,7 +474,8 @@ $(function () {
 gsc.download.create(map, layerWFS);
 $(function () {
     $('#btnDownload').click(function () {
-        var format = document.getElementById('slcformat').value;
+        var yourSelect  = document.getElementById('slcformat');
+       var format =  yourSelect.options[ yourSelect.selectedIndex ].value 
         var result, contentType;
         if (format == "kml") {
             result = gsc.download.kml();
