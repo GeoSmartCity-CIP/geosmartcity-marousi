@@ -59,7 +59,6 @@
 	</nav>
 	<div class="navbar-offset"></div>
 	<div id="map"> </div>
-	
 	<!-- Edit pop up sector-->
 	<div id="popup" class="ol-popup">
 		<a href="#" id="popup-closer" class="ol-popup-closer"></a>
@@ -168,7 +167,7 @@
 							Then select the format:
 							</p>
 							<select id="slcformat">
-																					<option value="gml">GML</option>
+																					
 																					<option value="kml">KML</option>
 																					<option value="wkt">WKT</option>
 																<option value="gpx">GPX</option>
@@ -186,104 +185,103 @@
 		<span id="coordinate"></span>
 		<span id="scalebar"></span>
 	</div>
-
-
 	<div id="overlaydddd" class="my-legend">
 		<div class='legend-title'>The Title or Explanation of your Map</div>
 		<div class='legend-scale'>
-  				<ul class='legend-labels'>
-			<li><span style='background:#006600;'></span>&#60;30 kwH/m2</li>
-					<li><span style='background:#00ff80;'></span>31 - 60 kwH/m2</li>
-					<li><span style='background:#b2ffd8;'></span>61 -120 kwH/m2</li>
-					<li><span style='background:#ffff00;'></span>121- 180 kwH/m2</li>
-					<li><span style='background:#ff8000;'></span>181 - 220 kwH/m2</li>
-					<li><span style='background:#ff9999;'></span>221-270 kwH/m2</li>
-					<li><span style='background:#ff0000;'></span>&#62;270 kwH/m2</li>
-		</ul>
-	</div>
-	<!-- Modal  Registration sector-->
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3">
-							<div class="panel panel-login">
-								<div class="panel-heading">
-									<div class="row">
-										<div class="col-xs-6">
-											<a href="#" class="active" id="login-form-link">Login</a>
+			<ul class='legend-labels'>
+				<li><span style='background:#006600;'></span>&#60;30 kwH/m2</li>
+				<li><span style='background:#00ff80;'></span>31 - 60 kwH/m2</li>
+				<li><span style='background:#b2ffd8;'></span>61 -120 kwH/m2</li>
+				<li><span style='background:#ffff00;'></span>121- 180 kwH/m2</li>
+				<li><span style='background:#ff8000;'></span>181 - 220 kwH/m2</li>
+				<li><span style='background:#ff9999;'></span>221-270 kwH/m2</li>
+				<li><span style='background:#ff0000;'></span>&#62;270 kwH/m2</li>
+			</ul>
+		</div>
+		<!-- Modal  Registration sector-->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-6 col-md-offset-3">
+								<div class="panel panel-login">
+									<div class="panel-heading">
+										<div class="row">
+											<div class="col-xs-6">
+												<a href="#" class="active" id="login-form-link">Login</a>
+											</div>
+											<div class="col-xs-6">
+												<a href="#" id="register-form-link">Register</a>
+											</div>
 										</div>
-										<div class="col-xs-6">
-											<a href="#" id="register-form-link">Register</a>
-										</div>
+										<hr>
 									</div>
-									<hr>
-								</div>
-								<div class="panel-body">
-									<div class="row">
-										<div class="col-lg-12">
-											<form id="login-form" method="post" role="form" style="display: block;">
-												<div class="form-group">
-													<input type="text" name="username" id="login-username" tabindex="1" class="form-control" placeholder="Username" value="">
-												</div>
-												<div class="form-group">
-													<input type="password" name="password" id="login-password" tabindex="2" class="form-control" placeholder="Password">
-												</div>
-												<div class="form-group text-center">
-													<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-													<label for="remember"> Remember Me</label>
-												</div>
-												<div class="form-group">
-													<div class="row">
-														<div class="col-sm-6 col-sm-offset-3">
-															<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
-														</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-lg-12">
+												<form id="login-form" method="post" role="form" style="display: block;">
+													<div class="form-group">
+														<input type="text" name="username" id="login-username" tabindex="1" class="form-control" placeholder="Username" value="">
 													</div>
-												</div>
-												<div class="form-group">
-													<div class="row">
-														<div class="col-lg-12">
-															<div class="text-center">
-																<a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+													<div class="form-group">
+														<input type="password" name="password" id="login-password" tabindex="2" class="form-control" placeholder="Password">
+													</div>
+													<div class="form-group text-center">
+														<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+														<label for="remember"> Remember Me</label>
+													</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-sm-6 col-sm-offset-3">
+																<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
 															</div>
 														</div>
 													</div>
-												</div>
-											</form>
-											<form id="register-form" role="form" style="display: none;">
-												<div class="form-group">
-													<input type="text" name="register-username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-												</div>
-												<div class="form-group">
-													<input type="email" name="register-email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
-												</div>
-												<div class="form-group">
-													<input type="password" name="register-password" id="password" tabindex="2" class="form-control" placeholder="Password">
-												</div>
-												<div class="form-group">
-													<input type="password" name="register-confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-												</div>
-												<div class="form-group">
-													<label for="organization">Organization list:</label>   <select class="form-control" id="organization">
+													<div class="form-group">
+														<div class="row">
+															<div class="col-lg-12">
+																<div class="text-center">
+																	<a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</form>
+												<form id="register-form" role="form" style="display: none;">
+													<div class="form-group">
+														<input type="text" name="register-username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+													</div>
+													<div class="form-group">
+														<input type="email" name="register-email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+													</div>
+													<div class="form-group">
+														<input type="password" name="register-password" id="password" tabindex="2" class="form-control" placeholder="Password">
+													</div>
+													<div class="form-group">
+														<input type="password" name="register-confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+													</div>
+													<div class="form-group">
+														<label for="organization">Organization list:</label>   <select class="form-control" id="organization">
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
                                                 <option value="4">4</option>
                                               </select>
-												</div>
-												<div class="form-group">
-													<div class="row">
-														<div class="col-sm-6 col-sm-offset-3">
-															<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+													</div>
+													<div class="form-group">
+														<div class="row">
+															<div class="col-sm-6 col-sm-offset-3">
+																<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+															</div>
 														</div>
 													</div>
-												</div>
-											</form>
+												</form>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -293,7 +291,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 <script>
