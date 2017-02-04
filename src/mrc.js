@@ -507,8 +507,8 @@ function download(content, filename, contentType) {
     var blob = new Blob([content], {
         'type': contentType
     });
-    a.href = window.URL.createObjectURL(blob);
     a.download = filename;
+    a.href = window.URL.createObjectURL(blob);    
     a.click();
 }
 
