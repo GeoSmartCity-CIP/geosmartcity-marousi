@@ -498,25 +498,13 @@ $(function () {
             result = gsc.download.gml(ol.format.GML);
             contentType = "application/gml+xml";
         }
+        
         download(result, 'result.' + format, contentType);
     });
-})
+});
 
 
-function download(content, filename, contentType) {
-    if (!contentType) contentType = 'application/octet-stream';
-    var a = document.createElement('a');
-        a.download = filename;
-    a.name = filename;
-    a.type = contentType;
-    var blob = new Blob([content], {
-         type : "octet/stream"
-    });
 
-    a.href = window.URL.createObjectURL(blob);    
-    a.click();
-    window.URL.revokeObjectURL(url);
-}
 
 
 
