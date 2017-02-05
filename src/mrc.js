@@ -54,8 +54,8 @@ var layerWFS = new ol.layer.Vector({
 });
 
 //WMS marousi
-var marousi = new ol.layer.Image({
-    title: 'Buildings',
+var marousi_complete_status = new ol.layer.Image({
+    title: 'Buildings Completed Status',
     type: 'overlay',
     combine: true,
     visible: true,
@@ -66,11 +66,69 @@ var marousi = new ol.layer.Image({
             'FORMAT': 'image/png',
             'VERSION': '1.1.1',
             LAYERS: 'gsc:marousi',
-            STYLES: ''
+            STYLES: 'complete_status'
 
         }
     })
 });
+
+var marousi_AgeOfConstruction = new ol.layer.Image({
+    title: 'Buildings Age of Construction',
+    type: 'overlay',
+    combine: true,
+    visible: false,
+    source: new ol.source.ImageWMS({
+        ratio: 1,
+        url: 'http://hub.geosmartcity.eu/geoserver/gsc/wms',
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            LAYERS: 'gsc:marousi',
+            STYLES: 'bdgAgeOfConstruction'
+
+        }
+    })
+});
+
+
+var marousi_Use = new ol.layer.Image({
+    title: 'Buildings Age of Construction',
+    type: 'overlay',
+    combine: true,
+    visible: false,
+    source: new ol.source.ImageWMS({
+        ratio: 1,
+        url: 'http://hub.geosmartcity.eu/geoserver/gsc/wms',
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            LAYERS: 'gsc:marousi',
+            STYLES: 'bdgUse'
+
+        }
+    })
+});
+
+
+var marousi_Height = new ol.layer.Image({
+    title: 'Buildings Height',
+    type: 'overlay',
+    combine: true,
+    visible: false,
+    source: new ol.source.ImageWMS({
+        ratio: 1,
+        url: 'http://hub.geosmartcity.eu/geoserver/gsc/wms',
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            LAYERS: 'gsc:marousi',
+            STYLES: 'bdgHeight'
+
+        }
+    })
+});
+
+
 
 var wps_source = new ol.source.Vector({
     url: 'data/marousi_wps.geojson',
@@ -270,7 +328,10 @@ gsc.map.addLayer(basemapLayers);
 var overlaygroupLayers = new ol.layer.Group({
     title: 'Overlays',
     layers: [
-        marousi,
+        marousi_complete_status,
+        marousi_AgeOfConstruction,
+        marousi_Use,
+        marousi_Height,
         layerWFS,
         epe,
         epi
