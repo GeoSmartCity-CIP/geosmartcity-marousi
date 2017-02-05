@@ -67,6 +67,7 @@ var marousi = new ol.layer.Image({
             'VERSION': '1.1.1',
             LAYERS: 'gsc:marousi',
             STYLES: ''
+
         }
     })
 });
@@ -182,18 +183,18 @@ var closer2 = document.getElementById('popup-closer2');
 
 
 var overlay = new ol.Overlay({
-  element: container2,
-  autoPan: false,
-  autoPanAnimation: {
-    duration: 250
-  }
+    element: container2,
+    autoPan: false,
+    autoPanAnimation: {
+        duration: 250
+    }
 });
-    closer2.onclick = function() {
-        overlay.setPosition(undefined);
-        closer.blur();
-        return false;
-      };
-      map.addOverlay(overlay);
+closer2.onclick = function () {
+    overlay.setPosition(undefined);
+    closer.blur();
+    return false;
+};
+map.addOverlay(overlay);
 
 map.addInteraction(hoverInteraction);
 hoverInteraction.on('select', function (e) {
@@ -206,14 +207,14 @@ hoverInteraction.on('select', function (e) {
         var keys = feature.getKeys();
         for (var property in atts) {
             if (atts.hasOwnProperty(property) != 'geometry') {
-                if(property !=='geometry'){
-                text += '<li>' + property + ': ' + atts[property] + '</li>';
+                if (property !== 'geometry') {
+                    text += '<li>' + property + ': ' + atts[property] + '</li>';
                 }
             }
         }
     }
     text += '</ul>'
-      content2.innerHTML = text;
+    content2.innerHTML = text;
     overlay.setPosition(coordinate);
 
 });
@@ -244,12 +245,13 @@ var basemapLayers = new ol.layer.Group({
             visible: false,
             source: new ol.source.ImageWMS({
                 ratio: 1,
-                url: 'http://gis.ktimanet.gr/wms/wmsopen/wmsserver.aspx',
+                url: 'http://tiles.geodata.gov.gr/service',
                 params: {
                     'FORMAT': 'image/png',
+                    STYLES: '',
+                    layers: "ktimatologio",
+                    exceptions: "application/vnd.ogc.se_inimage",
                     'VERSION': '1.1.1',
-                    LAYERS: 'ktimatologio',
-                    STYLES: ''
                 }
             })
         }),
@@ -472,8 +474,8 @@ $(function () {
 gsc.download.create(map, layerWFS);
 $(function () {
     $('#btnDownload').click(function () {
-        var yourSelect  = document.getElementById('slcformat');
-       var format =  yourSelect.options[ yourSelect.selectedIndex ].value 
+        var yourSelect = document.getElementById('slcformat');
+        var format = yourSelect.options[yourSelect.selectedIndex].value
         var result, contentType;
         if (format == "kml") {
             result = gsc.download.kml();
@@ -496,7 +498,7 @@ $(function () {
             result = gsc.download.gml(ol.format.GML);
             contentType = "application/gml+xml";
         }
-        
+
         download(result, 'result.' + format, contentType);
     });
 });
